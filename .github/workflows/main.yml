@@ -1,0 +1,31 @@
+name: Run Autodoist Script
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  run-autodoist:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: 3.11
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Run script
+      env:
+        TODOIST_API_KEY: ${{ secrets.60aa5db879b0b7b8d1019046d4870f1b75cf1477 }}
+      run: |
+      
+        python autodoist.py
